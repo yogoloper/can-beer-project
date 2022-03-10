@@ -2,14 +2,24 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -20,83 +30,331 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
-    <title>한 캔 beer | 작성페이지</title>
+    <title>캔을 Beer</title>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <!-- Favicons -->
+    <link href="static/assets/img/favicon.png" rel="icon">
+    <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Muli:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Stylish&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet'>
+    </style>
+    <!-- Template Main CSS File -->
     <style>
-        * {
-            font-family: 'Jua', sans-serif;
+
+        header {
+            height: 70px;
+            transition: all 0.5s;
+            z-index: 997;
+            transition: all 0.5s;
+            background: #fff;
         }
 
-        .posting-box {
-            width: 500px;
-            margin-top: 20px;
+        header.fixed-top {
+            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
         }
+
+        header .logo h1 {
+            font-size: 28px;
+            margin: 0;
+            padding: 10px 0;
+            line-height: 1;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        header .logo h1 a, header .logo h1 a:hover {
+            color: #2b2320;
+            text-decoration: none;
+        }
+
+        header .logo img {
+            padding: 0;
+            margin: 0;
+            max-height: 40px;
+        }
+
 
         .wrap {
-            width: 900px;
+
+            width: 600px;
+            margin-top: 30px;
             margin: auto;
+            font-family: "Muli", sans-serif;
+            padding: 50px 50px 20px 20px;
+            text-align: left;
+
+            justify-content: left;
+            align-items: left;
+
+
         }
 
-        .container {
-            padding-left: 50px;
-        }
+
     </style>
+
+    <script>
+
+        {#let beer_num_old = ''#}
+
+        // 업데이트 상태 : 새로운 게시물인지 기존을 업데이트 하는건지 플래그
+        let updateState = false
+        console.log(decodeURI(window.location.search))
+        let len = decodeURI(window.location.search).length
+        let temp = decodeURI(window.location.search).substr(1, len - 1)
+        // url로 들어온 각 파라미터 쪼개기
+        let arr = temp.split("&")
+        let result =[]
+        // 쪼개진 파라미터를 '='을 기준으로 쪼개기
+        for (let i = 0; i < arr.length; i++) {
+            result.push(arr[i].split("="))
+        }
+
+        let beer_num_old = result[4][1]
+        // url에서 기존 beer_num 가져오기
+
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+
+            // beer_num이 있다면 updateState를 true로 변경
+            if (result[4][1] !== '') {
+                updateState = true
+            }
+
+
+            // 각 인풋에 쪼갠 url을 데이터에 맞게 넣기
+            $("#beer-name").val(result[0][1])
+            $("#beer-type").val(result[1][1])
+            $("#beer-company").val(result[2][1])
+            $("#beer-country").val(result[3][1])
+            $("#beer-date").val(result[5][1])
+
+
+            let aa = []
+            for (let i = 6; i < result.length; i++) {
+                aa.push(result[i][1].split("+"))
+            }
+
+
+            let bb = []
+            for (let i = 0; i < aa.length; i++) {
+                bb.push(aa[i][3])
+
+            }
+
+            // 맥주 1캔 가격 리스트
+            let one = []
+            for (let i = 0; i < bb.length; i++) {
+                one.push(bb[i].split("%"))
+            }
+
+            // 맥주 4캔 가격 리스트
+            let four = []
+            for (let i = 0; i < aa.length; i++) {
+                let last = aa[i][5].substr(0, aa[i][5].length - 1)
+                {#let last = aa[i][5]#}
+                four.push(last)
+            }
+
+
+            for (let i = 6; i < result.length; i++) {
+                console.log(result[i])
+                if (result[i][1].includes('gs')) {
+                    console.log(one[i - 6][0])
+                    $("#GS-price-1").val(one[i - 6][0])
+                    $("#GS-price-4").val(four[i - 6])
+                } else if (result[i][1].includes('nobrand')) {
+                    $("#nobrand-price-1").val(one[i - 6][0])
+                    $("#nobrand-price-4").val(four[i - 6])
+                } else if (result[i][1].includes('CU')) {
+                    $("#CU-price-1").val(one[i - 6][0])
+                    $("#CU-price-4").val(four[i - 6])
+                } else if (result[i][1].includes('mini')) {
+                    $("#mini-price-1").val(one[i - 6][0])
+                    $("#mini-price-4").val(four[i - 6])
+                } else if (result[i][1].includes('seven')) {
+                    $("#seven-price-1").val(one[i - 6][0])
+                    $("#seven-price-4").val(four[i - 6])
+                }
+            }
+
+
+        })
+
+
+        function posting_new() {
+            let beer_name = $("#beer-name").val()
+            let beer_type = $("#beer-type").val()
+            let beer_company = $("#beer-company").val()
+            let beer_country = $("#beer-country").val()
+            let beer_date = $("#beer-date").val()
+            let mini_price_1 = $("#mini-price-1").val()
+            let mini_price_4 = $("#mini-price-4").val()
+            let gs_price_1 = $("#GS-price-1").val()
+            let gs_price_4 = $("#GS-price-4").val()
+            let cu_price_1 = $("#CU-price-1").val()
+            let cu_price_4 = $("#CU-price-4").val()
+            let seven_price_1 = $("#seven-price-1").val()
+            let seven_price_4 = $("#seven-price-4").val()
+            let nobrand_price_1 = $("#nobrand-price-1").val()
+            let nobrand_price_4 = $("#nobrand-price-4").val()
+
+
+            let file = $("#file")[0].files[0]
+            let form_data = new FormData()
+
+            form_data.append("file_give", file)
+            form_data.append("beer_name", beer_name)
+            form_data.append("beer_type", beer_type)
+            form_data.append("beer_company", beer_company)
+            form_data.append("beer_country", beer_country)
+            form_data.append("beer_date", beer_date)
+            form_data.append("mini_price_1", mini_price_1)
+            form_data.append("mini_price_4", mini_price_4)
+            form_data.append("gs_price_1", gs_price_1)
+            form_data.append("gs_price_4", gs_price_4)
+            form_data.append("cu_price_1", cu_price_1)
+            form_data.append("cu_price_4", cu_price_4)
+            form_data.append("seven_price_1", seven_price_1)
+            form_data.append("seven_price_4", seven_price_4)
+            form_data.append("nobrand_price_1", nobrand_price_1)
+            form_data.append("nobrand_price_4", nobrand_price_4)
+            if (updateState == true) {
+                form_data.append("beer_num_old", beer_num_old)
+            } else {
+                form_data.append("beer_num_old", 'empty')
+            }
+
+
+            $.ajax({
+                type: "POST",
+                url: "/api/writing",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.href = '/'
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
+<header id="header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+        <div class="logo">
+            <h1 class="text-light"><a href="/">캔을 Beer!</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+    </div>
+</header><!-- End Header -->
+
 <div class="wrap">
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1>새로운 맥주를 등록합니다.</h1>
-            <div class="posting-box">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="file">
-                    <label class="custom-file-label" for="file">제품 사진 업로드 하기</label>
-                </div>
-                <br><br><br><br>
-                <div class="beer-name">
-                    <label>맥주 이름을 입력해주세요</label>
-                    <input type="text" class="form-control" id="beer-name" placeholder="제품명">
-                </div>
-                <br><br>
-                <div class="beer-type">
-                    <label>맥주 종류를 입력해주세요</label>
-                    <select class="form-control" id="beer-type">
-                        <option>----맥주 종류를 선택해주세요----</option>
-                        <option>에일</option>
-                        <option>포터/스카우트</option>
-                        <option>밀맥주</option>
-                        <option>라거</option>
-                        <option>발포주</option>
-                    </select>
-                </div>
-                <br><br>
-                <div class="form-group">
-                    <label>맥주 제조사를 입력해주세요</label>
-                    <input type="text" class="form-control" id="beer-where" placeholder="제조사 이름">
-                </div>
-                <br><br>
-                <div class="form-group">
-                    <label>맥주 제조국를 입력해주세요</label>
-                    <input type="text" class="form-control" id="beer-country" placeholder="제조국 입력">
-                </div>
 
-                <br><br>
-
-
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">신상품입니까?</label>
-                </div>
-                 <br><br>
-                 <br><br>
-                <button type="submit" class="btn btn-primary">작성하기</button>
+    <h1>새로운 맥주를 등록합니다.</h1>
+    <br>
+    <div class="container">
+        <div class="posting-box" id="question">
+            <br>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="file">
+                <label class="custom-file-label" for="file">제품 사진 업로드 하기</label>
             </div>
+            <br><br>
+            <div class="beer-name">
+                <label>맥주 이름을 입력해주세요</label>
+                <input type="text" name="name" class="form-control" id="beer-name" placeholder="제품명">
+            </div>
+            <br>
+            <div class="beer-type">
+                <label>맥주 종류를 입력해주세요</label>
+                <select class="form-control" id="beer-type">
+                    <option>----맥주 종류를 선택해주세요----</option>
+                    <option>에일</option>
+                    <option>포터/스카우트</option>
+                    <option>밀맥주</option>
+                    <option>라거</option>
+                    <option>발포주</option>
+                </select>
+            </div>
+            <br>
+            <div class="form-group">
+                <label>맥주 제조사를 입력해주세요</label>
+                <input type="text" name="name" class="form-control" id="beer-company" placeholder="제조사 이름">
+            </div>
+            <br>
+            <div class="form-group">
+                <label>맥주 제조국를 입력해주세요</label>
+                <input type="text" name="name" class="form-control" id="beer-county" placeholder="제조 국가 이름">
+            </div>
+            <br>
+            <div class="form-group">
+                <label>맥주 제조날짜</label>
+                <p><input type="date" id="beer-date"></p>
+            </div>
+            <br>
+            <div class="form-group">
+                <label>미니스톱에서 파나요?</label>
+                <input type="number" class="form-control" id="mini-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="mini-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <br>
+                <label>GS25에서 파나요?</label>
+                <input type="number" class="form-control" id="GS-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="GS-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <br>
+                <label>CU에서 파나요?</label>
+                <input type="number" class="form-control" id="CU-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="CU-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <br>
+                <label>세븐일레븐에서 파나요?</label>
+                <input type="number" class="form-control" id="seven-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="seven-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <br>
+                <label>노브랜드에서 파나요?</label>
+                <input type="number" class="form-control" id="nobrand-price-1" placeholder="1개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="number" class="form-control" id="nobrand-price-4" placeholder="4개당 가격"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+            </div>
+            <br>
+            <div class="text-center">
+                <button type="button" class="btn btn-outline-success" onclick="posting_new()">작성하기</button>
+            </div>
+            <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+                <i class="bi bi-arrow-up-short"></i></a>
+
         </div>
     </div>
 </div>
 </body>
+</html>
